@@ -3,6 +3,10 @@ package com.driver;
 public class DeliveryPartner {
 
     private String id;
+
+    public DeliveryPartner() {
+    }
+
     private int numberOfOrders;
 
     public DeliveryPartner(String id) {
@@ -16,6 +20,10 @@ public class DeliveryPartner {
 
     public Integer getNumberOfOrders(){
         return numberOfOrders;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public void setNumberOfOrders(Integer numberOfOrders) {
