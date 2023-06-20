@@ -14,6 +14,7 @@ public class OrderService {
     OrderRepository orderRepository;
 
     public Order get(String orderId) {
+
         return orderRepository.get(orderId);
     }
 
@@ -25,5 +26,22 @@ public class OrderService {
     public List<String> getAllOrders() {
         return orderRepository.getAllOrders();
 
+    }
+
+    public void addPair(String partnerId, String orderId) {
+        orderRepository.addPair(partnerId,orderId);
+    }
+
+    public Integer getUnassignedOrderCount() {
+        return orderRepository.getUnassignedOrderCount();
+    }
+
+    public void changeOrderAssigenment(String partnerId) {
+        orderRepository.changeOrderAssignment(partnerId);
+
+    }
+
+    public void deleteOrder(String orderId) {
+        orderRepository.deleteOrder(orderId);
     }
 }

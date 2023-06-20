@@ -23,4 +23,20 @@ public class DeliveryPartnerService {
     public List<String> getOrdersByPartnerId(String partnerId){
         return deliveryPartnerRepository.getOrdersbyPartnerId(partnerId);
     }
+
+    public void addPair(String partnerId, String orderId) {
+        deliveryPartnerRepository.addPair(partnerId,orderId);
+    }
+
+    public void deletePartner(String partnerId) {
+        deliveryPartnerRepository.deletePartner(partnerId);
+
+    }
+
+    public void removeAssignedOrder(String orderId) {
+        deliveryPartnerRepository.removeAssignedOrder(orderId);
+
+    }
+
+
 }
