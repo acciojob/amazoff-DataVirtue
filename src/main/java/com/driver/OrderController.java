@@ -48,6 +48,8 @@ DeliveryPartnerService deliveryPartnerService;
     public ResponseEntity<Order> getOrderById(@PathVariable String orderId){
         Order order = orderService.get(orderId);
         //order should be returned with an orderId.
+        if(order==null)
+            return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
 
         return new ResponseEntity<>(order, HttpStatus.CREATED);
     }
