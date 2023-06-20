@@ -14,13 +14,13 @@ public class OrderRepository {
     Map<String,String>orderPartnerDatabase = new HashMap<>();
 
 
-    public Order get(String orderId) {
+    public Order getOrder(String orderId) {
         if(!database.containsKey(orderId))
             return null;
         return database.get(orderId);
     }
 
-    public void add(Order order){
+    public void addOrder(Order order){
         database.put(order.getId(),order);
         orderPartnerDatabase.put(order.getId(),"unassigned");
     }

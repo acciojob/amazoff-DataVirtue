@@ -20,7 +20,7 @@ DeliveryPartnerService deliveryPartnerService;
 
     @PostMapping("/add-order") // working fine
     public ResponseEntity<String> addOrder(@RequestBody Order order){
-        orderService.add(order);
+        orderService.addOrder(order);
         return new ResponseEntity<>("New order added successfully", HttpStatus.CREATED);
     }
 
@@ -44,7 +44,7 @@ DeliveryPartnerService deliveryPartnerService;
 
     @GetMapping("/get-order-by-id/{orderId}") // working fine
     public ResponseEntity<Order> getOrderById(@PathVariable String orderId){
-        Order order = orderService.get(orderId);
+        Order order = orderService.getOrder(orderId);
         //order should be returned with an orderId.
         if(order==null)
             return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
@@ -80,7 +80,7 @@ DeliveryPartnerService deliveryPartnerService;
 
         List<String> orders = new ArrayList<>();
         for(String orderId: orderIds){
-            orders.add(orderService.get(orderId).toString());
+            orders.add(orderService.getOrder(orderId).toString());
         }
 
         //orders should contain a list of orders by PartnerId
@@ -113,7 +113,7 @@ DeliveryPartnerService deliveryPartnerService;
         Integer countOfOrders = 0;
 
         for(String orderId: list){
-            Order order = orderService.get(orderId);
+            Order order = orderService.getOrder(orderId);
             if(order.getDeliveryTime()>dummy.getDeliveryTime())
                 countOfOrders++;
         }
@@ -128,7 +128,7 @@ DeliveryPartnerService deliveryPartnerService;
          List<String> list = deliveryPartnerService.getOrdersByPartnerId(partnerId);
          int maxTime = 0;
          for(String orderId: list){
-             Order order = orderService.get(orderId);
+             Order order = orderService.getOrder(orderId);
              maxTime = Math.max(maxTime,order.getDeliveryTime());
          }
          String minutes = maxTime%60>10?maxTime%60 + "":maxTime%60+"0";

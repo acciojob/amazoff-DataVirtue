@@ -13,13 +13,13 @@ public class OrderService {
     @Autowired
     OrderRepository orderRepository;
 
-    public Order get(String orderId) {
+    public Order getOrder(String orderId) {
 
-        return orderRepository.get(orderId);
+        return orderRepository.getOrder(orderId);
     }
 
-    public void add(Order order){
-        orderRepository.add(order);
+    public void addOrder(Order order){
+        orderRepository.addOrder(order);
     }
 
 
