@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("orders")
+@RequestMapping("/orders")
 public class OrderController {
 
 @Autowired
@@ -20,8 +20,6 @@ DeliveryPartnerService deliveryPartnerService;
 
     @PostMapping("/add-order") // working fine
     public ResponseEntity<String> addOrder(@RequestBody Order order){
-        if(order==null)
-            return new ResponseEntity<>("No ObjectFound",HttpStatus.BAD_REQUEST);
         orderService.add(order);
         return new ResponseEntity<>("New order added successfully", HttpStatus.CREATED);
     }
