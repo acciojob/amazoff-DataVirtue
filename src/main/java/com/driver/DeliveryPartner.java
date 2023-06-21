@@ -4,8 +4,9 @@ public class DeliveryPartner {
 
     private String id;
 
-//    public DeliveryPartner() {
-//    }
+    public DeliveryPartner() {
+
+    }
 
     private int numberOfOrders;
 
