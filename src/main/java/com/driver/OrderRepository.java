@@ -16,9 +16,10 @@ public class OrderRepository {
 
 
 
-    public Order getOrder(String orderId) {
+    public Order getOrder(String orderId) throws Exception {
         if(!orderMap.containsKey(orderId))
-            return null;
+            throw new Exception("Order Not Found");
+
         return orderMap.get(orderId);
     }
 
@@ -28,9 +29,9 @@ public class OrderRepository {
 
     }
 
-    public Set<String> getOrdersByPartnerId(String partnerId){
+    public Set<String> getOrdersByPartnerId(String partnerId) throws Exception {
         if(!partnerOrderDatabase.containsKey(partnerId))
-            return null;
+             throw new Exception("Custom Exception");
         return partnerOrderDatabase.get(partnerId);
     }
 

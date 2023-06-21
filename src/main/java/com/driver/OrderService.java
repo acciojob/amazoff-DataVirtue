@@ -22,10 +22,11 @@ public class OrderService {
 
     }
     public DeliveryPartner getPartnerById(String partnerId) {
+
         return orderRepository.getPartner(partnerId);
     }
 
-    public List<String> getOrdersByPartnerId(String partnerId){
+    public List<String> getOrdersByPartnerId(String partnerId) throws Exception {
         List<String> list = new ArrayList<>();
         Set<String> set = orderRepository.getOrdersByPartnerId(partnerId);
 
@@ -45,7 +46,7 @@ public class OrderService {
     }
 
 
-    public Order getOrderById(String orderId) {
+    public Order getOrderById(String orderId) throws Exception {
 
         return orderRepository.getOrder(orderId);
     }
@@ -79,7 +80,7 @@ public class OrderService {
         return orderCount;
     }
 
-    public Integer getOrdersLeftAfterGivenTimeByPartnerId(String partnerId, String time) {
+    public Integer getOrdersLeftAfterGivenTimeByPartnerId(String partnerId, String time) throws Exception {
 
         Set<String> set = orderRepository.getOrdersByPartnerId(partnerId);
         Order dummy = new Order("1",time);

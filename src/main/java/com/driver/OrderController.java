@@ -37,7 +37,7 @@ OrderService orderService;
     }
 
     @GetMapping("/get-order-by-id/{orderId}")
-    public ResponseEntity<Order> getOrderById(@PathVariable String orderId){
+    public ResponseEntity<Order> getOrderById(@PathVariable String orderId) throws Exception {
         Order order = orderService.getOrderById(orderId);
         //order should be returned with an orderId.
         if(order==null)
@@ -68,7 +68,7 @@ OrderService orderService;
     }
 
     @GetMapping("/get-orders-by-partner-id/{partnerId}") // working fine
-    public ResponseEntity<List<String>> getOrdersByPartnerId(@PathVariable String partnerId){
+    public ResponseEntity<List<String>> getOrdersByPartnerId(@PathVariable String partnerId) throws Exception {
 
 
 
@@ -97,7 +97,7 @@ OrderService orderService;
     }
 
     @GetMapping("/get-count-of-orders-left-after-given-time/{partnerId}")
-    public ResponseEntity<Integer> getOrdersLeftAfterGivenTimeByPartnerId(@PathVariable String time, @PathVariable String partnerId){
+    public ResponseEntity<Integer> getOrdersLeftAfterGivenTimeByPartnerId(@PathVariable String time, @PathVariable String partnerId) throws Exception {
 
 
         Integer countOfOrders =  orderService.getOrdersLeftAfterGivenTimeByPartnerId(partnerId,time);
@@ -109,7 +109,7 @@ OrderService orderService;
     }
 
     @GetMapping("/get-last-delivery-time/{partnerId}")
-    public ResponseEntity<String> getLastDeliveryTimeByPartnerId(@PathVariable String partnerId){
+    public ResponseEntity<String> getLastDeliveryTimeByPartnerId(@PathVariable String partnerId) throws Exception {
          List<String> list = orderService.getOrdersByPartnerId(partnerId);
          int maxTime = 0;
          for(String orderId: list){
