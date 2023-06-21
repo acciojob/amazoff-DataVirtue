@@ -7,11 +7,11 @@ import java.util.*;
 
 @Repository
 public class OrderRepository {
-    Map<String, Order> orderMap = new HashMap<>();
-    Map<String,String>orderPartnerDatabase = new HashMap<>();
+    private Map<String, Order> orderMap = new HashMap<>();
+    private Map<String,String>orderPartnerDatabase = new HashMap<>();
 
-    Map<String,DeliveryPartner> partnerMap = new HashMap<>();
-    Map<String, Set<String>> partnerOrderDatabase = new HashMap<>();
+    private Map<String,DeliveryPartner> partnerMap = new HashMap<>();
+    private Map<String, Set<String>> partnerOrderDatabase = new HashMap<>();
 
 
 
@@ -52,8 +52,6 @@ public class OrderRepository {
 
     }
 
-
-
     public DeliveryPartner getPartner(String partnerId) {
 
         if(!partnerMap.containsKey(partnerId))
@@ -75,9 +73,6 @@ public class OrderRepository {
         return list;
     }
 
-    public void addPair(String partnerId, String orderId) {
-        orderPartnerDatabase.put(orderId,partnerId);
-    }
 
     public int getUnassignedOrderCount() {
         int count = 0;

@@ -72,6 +72,9 @@ public class OrderService {
     public Integer getOrderCountByPartnerId(String partnerId) {
 
         DeliveryPartner deliveryPartner = orderRepository.getPartner(partnerId);
+        if(deliveryPartner==null)
+            return null;
+
         Integer orderCount = deliveryPartner.getNumberOfOrders();
         return orderCount;
     }
