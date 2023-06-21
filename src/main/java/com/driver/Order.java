@@ -28,8 +28,6 @@ public class Order {
         this.deliveryTime = deliveryTime;
     }
 
-    public Order() {
-    }
 
     @Override
     public String toString() {

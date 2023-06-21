@@ -4,7 +4,9 @@ package com.driver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 
 @Service
@@ -13,7 +15,37 @@ public class OrderService {
     @Autowired
     OrderRepository orderRepository;
 
-    public Order getOrder(String orderId) {
+    public void addPartner(String deliveryPartnerId){
+        DeliveryPartner deliveryPartner = new DeliveryPartner(deliveryPartnerId);
+        orderRepository.addPartner(deliveryPartner);
+//        System.out.println(deliveryPartner.getNumberOfOrders());
+
+    }
+    public DeliveryPartner getPartnerById(String partnerId) {
+        return orderRepository.getPartner(partnerId);
+    }
+
+    public List<String> getOrdersByPartnerId(String partnerId){
+        List<String> list = new ArrayList<>();
+        Set<String> set = orderRepository.getOrdersByPartnerId(partnerId);
+
+        for(String oid: set){
+            list.add(getOrderById(oid).toString());
+        }
+
+        return list;
+    }
+
+    public void addOrderPartnerPair(String partnerId, String orderId) {
+        orderRepository.addOrderPartnerPair(partnerId,orderId);
+    }
+
+    public void deletePartnerById(String partnerId) {
+        orderRepository.deletePartnerById(partnerId);
+    }
+
+
+    public Order getOrderById(String orderId) {
 
         return orderRepository.getOrder(orderId);
     }
@@ -28,20 +60,34 @@ public class OrderService {
 
     }
 
-    public void addPair(String partnerId, String orderId) {
-        orderRepository.addPair(partnerId,orderId);
-    }
-
     public Integer getUnassignedOrderCount() {
         return orderRepository.getUnassignedOrderCount();
     }
 
-    public void changeOrderAssigenment(String partnerId) {
-        orderRepository.changeOrderAssignment(partnerId);
 
+    public void deleteOrderById(String orderId) {
+        orderRepository.deleteOrderById(orderId);
     }
 
-    public void deleteOrder(String orderId) {
-        orderRepository.deleteOrder(orderId);
+    public Integer getOrderCountByPartnerId(String partnerId) {
+
+        DeliveryPartner deliveryPartner = orderRepository.getPartner(partnerId);
+        Integer orderCount = deliveryPartner.getNumberOfOrders();
+        return orderCount;
+    }
+
+    public Integer getOrdersLeftAfterGivenTimeByPartnerId(String partnerId, String time) {
+
+        Set<String> set = orderRepository.getOrdersByPartnerId(partnerId);
+        Order dummy = new Order("1",time);
+
+        Integer countOfOrders = 0;
+
+        for(String orderId: set){
+            Order order = orderRepository.getOrder(orderId);
+            if(order.getDeliveryTime()>dummy.getDeliveryTime())
+                countOfOrders++;
+        }
+        return countOfOrders;
     }
 }
