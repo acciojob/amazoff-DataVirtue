@@ -35,11 +35,11 @@ public class OrderRepository {
         return partnerOrderDatabase.get(partnerId);
     }
 
-    public void addOrderPartnerPair(String partnerId, String orderId) {
+    public void addOrderPartnerPair(String partnerId, String orderId) throws Exception {
         if(!partnerMap.containsKey(partnerId))
-            return;
+            throw new Exception("Partner Not Found");
         if(!orderMap.containsKey(orderId))
-            return;
+            throw new Exception("Order Not Found");
 
         DeliveryPartner partner = partnerMap.get(partnerId);
 

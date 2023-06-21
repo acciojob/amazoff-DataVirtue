@@ -37,7 +37,7 @@ public class OrderService {
         return list;
     }
 
-    public void addOrderPartnerPair(String partnerId, String orderId) {
+    public void addOrderPartnerPair(String partnerId, String orderId) throws Exception {
         orderRepository.addOrderPartnerPair(partnerId,orderId);
     }
 
@@ -51,7 +51,9 @@ public class OrderService {
         return orderRepository.getOrder(orderId);
     }
 
-    public void addOrder(Order order){
+    public void addOrder(Order order) throws Exception {
+        if(order.getId()==null)
+            throw new Exception("Invalid Order");
         orderRepository.addOrder(order);
     }
 
@@ -70,11 +72,11 @@ public class OrderService {
         orderRepository.deleteOrderById(orderId);
     }
 
-    public Integer getOrderCountByPartnerId(String partnerId) {
+    public Integer getOrderCountByPartnerId(String partnerId) throws Exception {
 
         DeliveryPartner deliveryPartner = orderRepository.getPartner(partnerId);
         if(deliveryPartner==null)
-            return null;
+            throw new Exception("Invalid Partner Id");
 
         Integer orderCount = deliveryPartner.getNumberOfOrders();
         return orderCount;
