@@ -7,12 +7,18 @@ import java.util.*;
 
 @Repository
 public class OrderRepository {
-    private Map<String, Order> orderMap = new HashMap<>();
-    private Map<String,String>orderPartnerDatabase = new HashMap<>();
+    private Map<String, Order> orderMap;
+    private Map<String,String>orderPartnerDatabase;
 
-    private Map<String,DeliveryPartner> partnerMap = new HashMap<>();
-    private Map<String, Set<String>> partnerOrderDatabase = new HashMap<>();
+    private Map<String,DeliveryPartner> partnerMap;
+    private Map<String, Set<String>> partnerOrderDatabase;
 
+    public OrderRepository(){
+        orderMap = new HashMap<>();
+        orderPartnerDatabase = new HashMap<>();
+        partnerMap = new HashMap<>();
+        partnerOrderDatabase = new HashMap<>();
+    }
 
 
 

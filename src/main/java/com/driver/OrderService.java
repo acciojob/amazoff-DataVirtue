@@ -13,7 +13,7 @@ import java.util.Set;
 public class OrderService {
 
     @Autowired
-    OrderRepository orderRepository;
+    OrderRepository orderRepository = new OrderRepository();
 
     public void addPartner(String deliveryPartnerId){
         DeliveryPartner deliveryPartner = new DeliveryPartner(deliveryPartnerId);
