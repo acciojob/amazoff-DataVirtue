@@ -70,11 +70,11 @@ public class OrderRepository {
         orderPartnerDatabase.put(order.getId(),"unassigned");
     }
 
-    public List<String> getAllOrders() {
-        List<String> list = new ArrayList<>();
+    public List<Order> getAllOrders() {
+        List<Order> list = new ArrayList<>();
 
         for(Order order: orderMap.values())
-            list.add(order.toString());
+            list.add(order);
         return list;
     }
 

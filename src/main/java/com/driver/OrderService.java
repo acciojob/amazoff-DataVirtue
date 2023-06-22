@@ -69,7 +69,7 @@ public class OrderService {
     }
 
 
-    public List<String> getAllOrders() {
+    public List<Order> getAllOrders() {
         return orderRepository.getAllOrders();
 
     }
