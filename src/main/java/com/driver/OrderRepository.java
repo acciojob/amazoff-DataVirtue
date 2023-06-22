@@ -22,47 +22,43 @@ public class OrderRepository {
 
 
 
-    public Order getOrder(String orderId) throws Exception {
-        if(!orderMap.containsKey(orderId))
-            throw new Exception("Order Not Found");
+    public Order getOrder(String orderId)  {
 
         return orderMap.get(orderId);
     }
 
-    public void addPartner(DeliveryPartner deliveryPartner){
-
+    public void addPartner(String deliveryPartnerId){
+        DeliveryPartner deliveryPartner = new DeliveryPartner(deliveryPartnerId);
         partnerMap.put(deliveryPartner.getId(),deliveryPartner);
 
     }
 
-    public Set<String> getOrdersByPartnerId(String partnerId) throws Exception {
-        if(!partnerOrderDatabase.containsKey(partnerId))
-             throw new Exception("Custom Exception");
+    public Set<String> getOrdersByPartnerId(String partnerId) {
+
         return partnerOrderDatabase.get(partnerId);
     }
 
-    public void addOrderPartnerPair(String partnerId, String orderId) throws Exception {
-        if(!partnerMap.containsKey(partnerId))
-            throw new Exception("Partner Not Found");
-        if(!orderMap.containsKey(orderId))
-            throw new Exception("Order Not Found");
+    public void addOrderPartnerPair(String orderId, String partnerId)  {
+
 
         DeliveryPartner partner = partnerMap.get(partnerId);
+//        if(partner==null) {
+        System.out.println(partnerMap);
+//            return;
+//        }
 
 
-        Set<String> set =  partnerOrderDatabase.getOrDefault(partnerId,new HashSet<>()); // add new order to the orderlist
+        Set<String> set =  partnerOrderDatabase.getOrDefault(partner.getId(),new HashSet<>()); // add new order to the orderlist
         set.add(orderId);
         partner.setNumberOfOrders(set.size()); // update
 
-        partnerOrderDatabase.put(partnerId,set);
+        partnerOrderDatabase.put(partner.getId(),set);
         orderPartnerDatabase.put(orderId,partnerId);
 
     }
 
     public DeliveryPartner getPartner(String partnerId) {
 
-        if(!partnerMap.containsKey(partnerId))
-            return null;
         return partnerMap.get(partnerId);
 
     }
@@ -83,6 +79,9 @@ public class OrderRepository {
 
     public int getUnassignedOrderCount() {
         int count = 0;
+        if(orderPartnerDatabase.size()==0)
+            return count;
+
         for(String s: orderPartnerDatabase.values())
             if(s.equals("unassigned"))
                 count++;
