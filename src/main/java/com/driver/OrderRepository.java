@@ -43,10 +43,10 @@ public class OrderRepository {
 
 
         DeliveryPartner partner = partnerMap.get(partnerId);
-//        if(partner==null) {
-        System.out.println(partnerMap);
-//            return;
-//        }
+        if(partner==null) {
+
+            return;
+        }
 
 
         Set<String> set =  partnerOrderDatabase.getOrDefault(partner.getId(),new HashSet<>()); // add new order to the orderlist
@@ -108,6 +108,10 @@ public class OrderRepository {
     public void deleteOrderById(String orderId) {
         orderMap.remove(orderId);
         String partnerId = orderPartnerDatabase.get(orderId);
+        System.out.println(orderPartnerDatabase);
+
+        if(partnerId.equals("unassigned"))
+            return;
 
         Set<String> set = partnerOrderDatabase.get(partnerId);
         set.remove(orderId);
