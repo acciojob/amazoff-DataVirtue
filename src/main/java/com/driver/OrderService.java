@@ -43,7 +43,7 @@ public class OrderService {
         if(set==null)
             return list;
         for(String oid: set){
-            list.add(getOrderById(oid).toString());
+            list.add(oid);
         }
 
         return list;
@@ -69,7 +69,7 @@ public class OrderService {
     }
 
 
-    public List<Order> getAllOrders() {
+    public List<String> getAllOrders() {
         return orderRepository.getAllOrders();
 
     }

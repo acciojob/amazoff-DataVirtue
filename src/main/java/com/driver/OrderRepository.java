@@ -70,17 +70,17 @@ public class OrderRepository {
         orderPartnerDatabase.put(order.getId(),"unassigned");
     }
 
-    public List<Order> getAllOrders() {
-        List<Order> list = new ArrayList<>();
+    public List<String> getAllOrders() {
+        List<String> list = new ArrayList<>();
 
-        for(Order order: orderMap.values())
-            list.add(order);
+        for(String oid: orderMap.keySet())
+            list.add(oid);
         return list;
     }
 
 
-    public int getUnassignedOrderCount() {
-        int count = 0;
+    public Integer getUnassignedOrderCount() {
+        Integer count = 0;
 //        if(orderPartnerDatabase.size()==0)
 //            return count;
 
