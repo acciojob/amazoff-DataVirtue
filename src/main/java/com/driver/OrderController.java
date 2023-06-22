@@ -12,7 +12,7 @@ import java.util.List;
 public class OrderController {
 
 @Autowired
-OrderService orderService = new OrderService();
+OrderService orderService;
 
 
     @PostMapping("/add-order")

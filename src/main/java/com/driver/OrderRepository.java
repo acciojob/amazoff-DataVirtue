@@ -33,7 +33,7 @@ public class OrderRepository {
 
     }
 
-    public Set<String> getOrdersByPartnerId(String partnerId) {
+    public Set<String> getOrderIdsByPartnerId(String partnerId) {
 
         return partnerOrderDatabase.get(partnerId);
     }
@@ -50,10 +50,11 @@ public class OrderRepository {
 
         Set<String> set =  partnerOrderDatabase.getOrDefault(partner.getId(),new HashSet<>()); // add new order to the orderlist
         set.add(orderId);
+
         partner.setNumberOfOrders(set.size()); // update
 
         partnerOrderDatabase.put(partner.getId(),set);
-        orderPartnerDatabase.put(orderId,partnerId);
+        orderPartnerDatabase.put(orderId,partner.getId());
 
     }
 

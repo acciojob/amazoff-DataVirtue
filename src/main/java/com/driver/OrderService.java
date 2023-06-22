@@ -13,7 +13,7 @@ import java.util.Set;
 public class OrderService {
 
     @Autowired
-    OrderRepository orderRepository = new OrderRepository();
+    OrderRepository orderRepository;
 
     public OrderService(){
 
@@ -34,7 +34,7 @@ public class OrderService {
 
     public List<String> getOrdersByPartnerId(String partnerId)  {
         List<String> list = new ArrayList<>();
-        Set<String> set = orderRepository.getOrdersByPartnerId(partnerId);
+        Set<String> set = orderRepository.getOrderIdsByPartnerId(partnerId);
         if(set==null)
             return list;
         for(String oid: set){
@@ -88,7 +88,7 @@ public class OrderService {
 
     public Integer getOrdersLeftAfterGivenTimeByPartnerId(String partnerId, String time) {
 
-        Set<String> set = orderRepository.getOrdersByPartnerId(partnerId);
+        Set<String> set = orderRepository.getOrderIdsByPartnerId(partnerId);
         Order dummy = new Order("1",time);
 
         Integer countOfOrders = 0;
@@ -103,12 +103,12 @@ public class OrderService {
 
     public String getLastDeliveryTimeByPartnerId(String partnerId) {
 
-        List<String> list = this.getOrdersByPartnerId(partnerId);
+        Set<String> set = orderRepository.getOrderIdsByPartnerId(partnerId);
+//        System.out.println(list);
 
         int maxTime = 0;
-        for(String orderId: list){
-            Order order = null;
-            order = this.getOrderById(orderId);
+        for(String orderId: set){
+            Order order = orderRepository.getOrder(orderId);
             maxTime = Math.max(maxTime,order.getDeliveryTime());
         }
         String minutes = maxTime%60>10?maxTime%60 + "":"0" +maxTime%60;
