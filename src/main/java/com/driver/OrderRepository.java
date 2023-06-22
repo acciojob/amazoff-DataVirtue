@@ -35,7 +35,8 @@ public class OrderRepository {
 
     public Set<String> getOrderIdsByPartnerId(String partnerId) {
 
-        return partnerOrderDatabase.get(partnerId);
+
+        return partnerOrderDatabase.getOrDefault(partnerId,null);
     }
 
     public void addOrderPartnerPair(String orderId, String partnerId)  {
