@@ -112,6 +112,8 @@ public class OrderService {
 
         Set<String> set = orderRepository.getOrderIdsByPartnerId(partnerId);
 //        System.out.println(list);
+        if(set==null)
+            return "00:00";
 
         int maxTime = 0;
         for(String orderId: set){

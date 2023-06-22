@@ -106,6 +106,8 @@ public class OrderRepository {
     }
 
     public void deleteOrderById(String orderId) {
+        if(!orderMap.containsKey(orderId))
+            return;
         orderMap.remove(orderId);
         String partnerId = orderPartnerDatabase.get(orderId);
         System.out.println(orderPartnerDatabase);
