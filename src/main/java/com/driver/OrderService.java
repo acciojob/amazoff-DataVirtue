@@ -35,8 +35,8 @@ public class OrderService {
     public List<String> getOrdersByPartnerId(String partnerId)  {
         List<String> list = new ArrayList<>();
         Set<String> set = orderRepository.getOrderIdsByPartnerId(partnerId);
-        if(set==null)
-            return list;
+//        if(set==null)
+//            return list;
         for(String oid: set){
             list.add(getOrderById(oid).toString());
         }

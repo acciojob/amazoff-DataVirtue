@@ -80,8 +80,8 @@ public class OrderRepository {
 
     public int getUnassignedOrderCount() {
         int count = 0;
-        if(orderPartnerDatabase.size()==0)
-            return count;
+//        if(orderPartnerDatabase.size()==0)
+//            return count;
 
         for(String s: orderPartnerDatabase.values())
             if(s.equals("unassigned"))
